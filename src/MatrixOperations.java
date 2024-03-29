@@ -11,21 +11,16 @@ public class MatrixOperations {
         }
         System.arraycopy(tmp, 0, arr , 0, arr.length);
     }
-    public static void multiplyMatrix(double[][] first_matrix, double[][] second_matrix, double[][] result)
-    {
-        int k = 0;
-        int index_y = 0;
-        var res = 0;
-        for (int c = 0; c < 8; c++)
-        {
-            for(int i = 0; i < 8; i++)
-            {
-                for(int j = 0; j < 8; j++)
-                {
-                    res += first_matrix[c][j] * second_matrix[i][j];
+    public static void multiplyMatrix(double[][] first_matrix, double[][] second_matrix, double[][] result) {
+        int n = first_matrix.length; // Assuming square matrices of size n x n
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                double sum = 0;
+                for (int k = 0; k < n; k++) {
+                    sum += first_matrix[i][k] * second_matrix[k][j];
                 }
-                result[c][i] = res;
-                res = 0;
+                result[i][j] = sum;
             }
         }
     }

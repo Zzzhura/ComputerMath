@@ -50,18 +50,35 @@ public class Solution {
                 Solve solve = new Solve(n, n, A, E[i], ipvt);
                 solve.solve();
             }
-            double[][] newArr = new double[8][8];
+            double[][] newArr = {{1, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 1, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 1, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 1, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 1, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 1, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 1},
+            };
             System.arraycopy(E, 0, newArr, 0, E.length);
             newArr = E;
             MatrixOperations.changeRowsColomns(newArr);
             double[][] R = new double[8][8];
             MatrixOperations.multiplyMatrix(A_copy, newArr, R);
             double[][] Result = new double[8][8];
-            MatrixOperations.subtractMatrix(R, E, Result);
+            double[][] E_1= {{1, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 1, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 1, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 1, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 1, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 1, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 1},
+            };
+            MatrixOperations.subtractMatrix(R, E_1, Result);
             double[] arrayOfResults = MatrixOperations.getArrayOfRowsSum(Result);
             OptionalDouble result = Arrays.stream(arrayOfResults).max();
-
-            System.out.println("For p = " + p + " RESULT: " + result);
+            String formattedValue = String.format("%.16f", result.getAsDouble());
+            System.out.println("For p = " + p + " RESULT: " + formattedValue);
         }
     }
 
